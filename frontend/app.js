@@ -2,6 +2,7 @@ let currentPlayer = "Player 1";
 let variation = "Portes";
 let variationPoints = 0;
 let timer;
+let isBotActive = true; // Enable bot for Player 2
 
 function startGame() {
   alert(`Game start! First variation: ${variation}`);
@@ -13,7 +14,11 @@ function startGame() {
 function nextTurn() {
   currentPlayer = currentPlayer === "Player 1" ? "Player 2" : "Player 1";
   updateUI();
-  startTurnTimer();
+  if (isBotActive && currentPlayer === "Player 2") {
+    setTimeout(botMove, 2000); // Simulate delay
+  } else {
+    startTurnTimer();
+  }
 }
 
 function updateUI() {
@@ -36,7 +41,6 @@ function rotateVariation() {
   alert(`Next variation: ${variation}`);
 }
 
-// Turn timer
 function startTurnTimer() {
   clearTimeout(timer);
   let seconds = 30;
@@ -61,7 +65,7 @@ function handleSurrender() {
   const winner = currentPlayer === "Player 1" ? "Player 2" : "Player 1";
   updateLeaderboard(winner, true);
   alert(`${currentPlayer} surrendered! ${winner} wins.`);
-  updatePoints(3); // 3 points for surrender
+  updatePoints(3);
   nextTurn();
 }
 
@@ -82,7 +86,19 @@ function renderLeaderboard() {
   `;
 }
 
-// Initial render
+// Bot move simulation
+function botMove() {
+  rollDice();
+  setTimeout(() => {
+    const diceElements = document.querySelectorAll('.die');
+    if (diceElements.length >= 2) {
+      diceElements[0].click();
+      diceElements[1].click();
+    }
+    startTurnTimer();
+  }, 1500);
+}
+
 window.onload = () => {
   renderLeaderboard();
 };
