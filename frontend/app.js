@@ -2,7 +2,8 @@ let currentPlayer = "Player 1";
 let variation = "Portes";
 let variationPoints = 0;
 let timer;
-let isBotActive = true; // Enable bot for Player 2
+let isBotActive = true;
+let disconnected = false;
 
 function startGame() {
   alert(`Game start! First variation: ${variation}`);
@@ -15,7 +16,7 @@ function nextTurn() {
   currentPlayer = currentPlayer === "Player 1" ? "Player 2" : "Player 1";
   updateUI();
   if (isBotActive && currentPlayer === "Player 2") {
-    setTimeout(botMove, 2000); // Simulate delay
+    setTimeout(botMove, 2000);
   } else {
     startTurnTimer();
   }
@@ -45,6 +46,7 @@ function startTurnTimer() {
   clearTimeout(timer);
   let seconds = 30;
   timer = setInterval(() => {
+    if (disconnected) return;
     document.getElementById("turn-indicator").textContent =
       `${currentPlayer}'s turn - ${seconds}s left`;
     seconds--;
@@ -60,7 +62,6 @@ function autoPlay() {
   nextTurn();
 }
 
-// Surrender logic
 function handleSurrender() {
   const winner = currentPlayer === "Player 1" ? "Player 2" : "Player 1";
   updateLeaderboard(winner, true);
@@ -69,7 +70,6 @@ function handleSurrender() {
   nextTurn();
 }
 
-// Leaderboard
 function updateLeaderboard(winner, wasSurrender) {
   const stats = JSON.parse(localStorage.getItem('tablaStats') || '{}');
   stats[winner] = (stats[winner] || 0) + 1;
@@ -86,7 +86,6 @@ function renderLeaderboard() {
   `;
 }
 
-// Bot move simulation
 function botMove() {
   rollDice();
   setTimeout(() => {
@@ -97,6 +96,20 @@ function botMove() {
     }
     startTurnTimer();
   }, 1500);
+}
+
+function sendEmoji(emoji) {
+  alert(`${currentPlayer} reacts: ${emoji}`);
+}
+
+function simulateDisconnect() {
+  disconnected = true;
+  alert(`${currentPlayer} disconnected! They have 90s to reconnect.`);
+  setTimeout(() => {
+    disconnected = false;
+    alert(`${currentPlayer} reconnected.`);
+    startTurnTimer();
+  }, 5000); // Simulates 5s disconnect for now
 }
 
 window.onload = () => {

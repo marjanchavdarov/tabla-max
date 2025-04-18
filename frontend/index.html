@@ -12,12 +12,23 @@
     <button id="surrender-btn" onclick="handleSurrender()">Surrender</button>
     <div id="turn-indicator">Current Turn: Player 1</div>
 
+    <!-- Emoji Reactions -->
+    <div id="emoji-bar">
+      <button onclick="sendEmoji('😂')">😂</button>
+      <button onclick="sendEmoji('🍻')">🍻</button>
+      <button onclick="sendEmoji('👑')">👑</button>
+    </div>
+
     <!-- Leaderboard -->
     <div id="leaderboard">
       <h3>Leaderboard</h3>
       <div id="stats"></div>
     </div>
+
+    <!-- Fake disconnect -->
+    <button onclick="simulateDisconnect()">Simulate Disconnect</button>
   </div>
+
   <script src="game.js"></script>
   <script src="app.js"></script>
 </body>
