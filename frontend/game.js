@@ -2,9 +2,16 @@ import { checkers, initPortes } from './engine/checkers.js';
 import { getValidMoves } from './engine/validator.js';
 import { moveChecker } from './engine/game-runner.js';
 
+const socket = io('http://localhost:3000');
+
 let currentPlayer = 1;
-let currentDice = [2, 4]; // Example roll
+let currentDice = [];
 let selectedChecker = null;
+
+function updateDiceUI() {
+  const display = document.getElementById('dice-display');
+  display.textContent = 'Dice: ' + currentDice.join(', ');
+}
 
 function updateUI() {
   document.querySelectorAll('.point').forEach(point => {
@@ -16,6 +23,8 @@ function updateUI() {
     document.querySelector(`.point[data-index="${move.from}"]`)?.classList.add('legal-move');
     document.querySelector(`.point[data-index="${move.to}"]`)?.classList.add('legal-move');
   });
+
+  updateDiceUI();
 }
 
 document.querySelectorAll('.point').forEach(point => {
@@ -35,6 +44,15 @@ document.querySelectorAll('.point').forEach(point => {
       }
     }
   });
+});
+
+document.getElementById('roll-btn').addEventListener('click', () => {
+  socket.emit('request_roll');
+});
+
+socket.on('dice_result', (dice) => {
+  currentDice = dice;
+  updateUI();
 });
 
 initPortes();
