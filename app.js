@@ -44,3 +44,23 @@ function rotateVariation() {
   variationPoints = 0;
   alert(`Next variation: ${variation}`);
 }
+let timer;
+function startTurnTimer() {
+  clearTimeout(timer);
+  let seconds = 30;
+  timer = setInterval(() => {
+    document.getElementById("turn-indicator").textContent =
+      `${currentPlayer}'s turn - ${seconds}s left`;
+    seconds--;
+    if (seconds < 0) {
+      clearInterval(timer);
+      autoPlay();
+    }
+  }, 1000);
+}
+
+function autoPlay() {
+  alert(`${currentPlayer} ran out of time. Auto-move triggered.`);
+  nextTurn();
+  startTurnTimer();
+}
