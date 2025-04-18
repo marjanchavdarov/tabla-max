@@ -18,7 +18,6 @@ function rollDice() {
     diceContainer.appendChild(die);
   });
 
-  // Store current roll values
   window.currentRoll = dice;
 }
 
@@ -31,6 +30,5 @@ function selectDie(index, element, value) {
 
   if (selectedDice.length === 2) {
     console.log("Chosen dice:", selectedDice.map(d => d.value));
-    // Here you can call a function like: playTurn(selectedDice[0].value, selectedDice[1].value);
   }
 }
