@@ -17,10 +17,13 @@ const io = new Server(server, {
 let rooms = {};
 let roomCounter = 1;
 
+function rollDice() {
+  return [Math.floor(Math.random() * 6) + 1, Math.floor(Math.random() * 6) + 1];
+}
+
 io.on('connection', (socket) => {
   console.log('New connection:', socket.id);
 
-  // Matchmaking: join or create room
   let assignedRoom = null;
   for (const room in rooms) {
     if (rooms[room].length < 2) {
@@ -39,17 +42,19 @@ io.on('connection', (socket) => {
   socket.room = assignedRoom;
   console.log(`${socket.id} joined ${assignedRoom}`);
 
-  // Notify both players
   if (rooms[assignedRoom].length === 2) {
     io.to(assignedRoom).emit('start_game', { room: assignedRoom });
   }
 
-  // Dice roll event
+  socket.on('request_roll', () => {
+    const dice = rollDice();
+    io.to(socket.room).emit('dice_result', dice);
+  });
+
   socket.on('roll_dice', (data) => {
     socket.to(socket.room).emit('opponent_roll', data);
   });
 
-  // Dice selection event
   socket.on('select_dice', (data) => {
     socket.to(socket.room).emit('opponent_select', data);
   });
