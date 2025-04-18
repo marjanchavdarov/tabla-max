@@ -33,3 +33,16 @@ body {
   background: gold;
   border-color: red;
 }
+
+#surrender-btn {
+  background: #ff4444;
+  color: white;
+  margin-top: 10px;
+}
+
+#leaderboard {
+  margin-top: 20px;
+  background: rgba(0,0,0,0.7);
+  padding: 10px;
+  color: white;
+}
