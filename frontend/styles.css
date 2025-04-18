@@ -1,60 +1,34 @@
 body {
   font-family: sans-serif;
-  background: url('wood-texture.jpg');
-  color: #fff;
   text-align: center;
+  background: #333;
+  color: white;
 }
 
-#game-board {
-  margin-top: 50px;
-}
-
-#dice-container {
+#board {
   display: flex;
   justify-content: center;
-  gap: 20px;
+  flex-wrap: wrap;
+  max-width: 600px;
+  margin: 20px auto;
 }
 
-.die {
-  width: 50px;
-  height: 50px;
-  background: #fff;
-  color: #000;
-  font-size: 24px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 2px solid black;
-  border-radius: 8px;
+.point {
+  width: 60px;
+  height: 60px;
+  margin: 5px;
+  background: #666;
+  border: 2px solid #444;
+  line-height: 60px;
+  font-size: 18px;
   cursor: pointer;
 }
 
-.die.selected {
+.point.legal-move {
+  border: 3px dashed lime;
+}
+
+.point.selected {
   background: gold;
-  border-color: red;
-}
-
-#surrender-btn {
-  background: #ff4444;
-  color: white;
-  margin-top: 10px;
-}
-
-#leaderboard {
-  margin-top: 20px;
-  background: rgba(0,0,0,0.7);
-  padding: 10px;
-  color: white;
-}
-
-#emoji-bar button {
-  font-size: 24px;
-  margin: 0 5px;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-}
-
-#emoji-bar button:hover {
-  transform: scale(1.2);
+  color: black;
 }

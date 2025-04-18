@@ -1,35 +1,40 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Tabla Max - 4Dice Backgammon</title>
+  <title>Tabla Max - Portes Engine</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <h1>Tabla Max</h1>
-  <div id="game-board">
-    <div id="dice-container"></div>
-    <button onclick="rollDice()">Roll Dice</button>
-    <button id="surrender-btn" onclick="handleSurrender()">Surrender</button>
-    <div id="turn-indicator">Current Turn: Player 1</div>
-
-    <!-- Emoji Reactions -->
-    <div id="emoji-bar">
-      <button onclick="sendEmoji('😂')">😂</button>
-      <button onclick="sendEmoji('🍻')">🍻</button>
-      <button onclick="sendEmoji('👑')">👑</button>
+  <h1>Tabla Max - Movement Engine Demo</h1>
+  <div id="board">
+    <!-- 24 Points -->
+    <div class="points">
+      <div class="point" data-index="0">0</div>
+      <div class="point" data-index="1">1</div>
+      <div class="point" data-index="2">2</div>
+      <div class="point" data-index="3">3</div>
+      <div class="point" data-index="4">4</div>
+      <div class="point" data-index="5">5</div>
+      <div class="point" data-index="6">6</div>
+      <div class="point" data-index="7">7</div>
+      <div class="point" data-index="8">8</div>
+      <div class="point" data-index="9">9</div>
+      <div class="point" data-index="10">10</div>
+      <div class="point" data-index="11">11</div>
+      <div class="point" data-index="12">12</div>
+      <div class="point" data-index="13">13</div>
+      <div class="point" data-index="14">14</div>
+      <div class="point" data-index="15">15</div>
+      <div class="point" data-index="16">16</div>
+      <div class="point" data-index="17">17</div>
+      <div class="point" data-index="18">18</div>
+      <div class="point" data-index="19">19</div>
+      <div class="point" data-index="20">20</div>
+      <div class="point" data-index="21">21</div>
+      <div class="point" data-index="22">22</div>
+      <div class="point" data-index="23">23</div>
     </div>
-
-    <!-- Leaderboard -->
-    <div id="leaderboard">
-      <h3>Leaderboard</h3>
-      <div id="stats"></div>
-    </div>
-
-    <!-- Fake disconnect -->
-    <button onclick="simulateDisconnect()">Simulate Disconnect</button>
   </div>
-
-  <script src="game.js"></script>
-  <script src="app.js"></script>
+  <script type="module" src="game.js"></script>
 </body>
 </html>
